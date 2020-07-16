@@ -1,13 +1,24 @@
+# export SPARK_HOME=~/spark-2.4.6-bin-hadoop2.7
+
 import os
-from pyspark import SparkContext
-from pyspark.sql import SQLContext
+import findspark
+
+#os.environ["JAVA_HOME"] = "usr/lib/jvm/java-8-openjdk-amd64"
+#os.environ["SPARK_HOME"] = "spark-2.4.6-bin-hadoop2.7"
+
+#findspark.init("spark-2.4.6-bin-hadoop2.7")
+
+#from pyspark import SparkContext
+from pyspark.sql import SparkSession, SQLContext
 from utils import load_preprocessed_dataframe, parse_point
 from ridge_regression import RidgeRegression
 
 if __name__ == '__main__':
     data_path = './data/2013-american-community-survey'
 
-    sc = SparkContext('local[*]')
+    #sc = SparkContext('local[*]')
+    spark = SparkSession.builder.master("local[*]").getOrCreate()
+    sc = spark.sparkContext
     sqlContext = SQLContext(sc)
 
     label = 'HINCP'

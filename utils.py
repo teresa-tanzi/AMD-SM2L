@@ -13,23 +13,28 @@ def install_kaggle():
     Installs and setups Kaggle API, that are needed in order to download the dataset.
     """
     
-    os.system('pip install --user kaggle')
-        
-    os.environ["PATH"] += os.pathsep + "/home/jovyan/.local/bin"
+    #os.system('pip install --user kaggle')
+    os.system('pip3 install --user kaggle')
 
-    os.mkdir('~/.kaggle')    
-    os.mknod('~/.kaggle/kaggle.json')
-    f = open('~/.kaggle/kaggle.json', 'w')
-    f.write('{"username":"teresatanzi","key":"a64ec0d865925975d3318adf576216b7"}')
-    f.close()
-    os.chmod('~/.kaggle/kaggle.json', 600)
+    os.environ["PATH"] += os.pathsep + "/home/teresa/.local/bin"
+    #os.system('export PATH=$PATH:/home/teresa/.local/bin')
 
-    #os.system('mkdir ~/.kaggle')
-    #os.system("""echo '{"username":"teresatanzi","key":"a64ec0d865925975d3318adf576216b7"}' >> ~/.kaggle/kaggle.json""")
-    #os.system('chmod 600 ~/.kaggle/kaggle.json')
+    #os.mkdir('~/.kaggle')    
+    #os.mknod('~/.kaggle/kaggle.json')
+    #f = open('~/.kaggle/kaggle.json', 'w')
+    #f.write('{"username":"teresatanzi","key":"a64ec0d865925975d3318adf576216b7"}')
+    #f.close()
+    #os.chmod('~/.kaggle/kaggle.json', 600)
+
+    if not os.path.exists('~/.kaggle'):
+        os.system("""echo '{"username":"teresatanzi","key":"a64ec0d865925975d3318adf576216b7"}' >> ~/.kaggle/kaggle.json""")
+        os.system('chmod 600 ~/.kaggle/kaggle.json')
+
+    os.system('export KAGGLE_USERNAME=teresatanzi')
+    os.system('export KAGGLE_KEY=a64ec0d865925975d3318adf576216b7')
     
-    os.environ["KAGGLE_USERNAME"] = "teresatanzi"
-    os.environ["KAGGLE_KEY"] = "a64ec0d865925975d3318adf576216b7"
+    #os.environ["KAGGLE_USERNAME"] = "teresatanzi"
+    #os.environ["KAGGLE_KEY"] = "a64ec0d865925975d3318adf576216b7"
 
 def download_dataset(path):
     """
@@ -49,7 +54,7 @@ def download_dataset(path):
     install_kaggle()
     
     # dataset download
-    pritn('Downloading the dataset...')
+    print('Downloading the dataset...')
     os.system('mkdir ./data')
     os.system('kaggle datasets download census/2013-american-community-survey -p ./data')
 
@@ -236,13 +241,13 @@ def load_preprocessed_dataframe(sqlContext, label, data_path = './data/2013-amer
         # preprocessing
         na_threshold = .6
 
-        print('Preprocessing with\n\tthreshold = {},\n\tlabel = {}\n...a'.format(na_threshold, label))
+        print('Preprocessing with\n\tthreshold = {},\n\tlabel = {}\n...'.format(na_threshold, label))
         df = preprocess(df, na_threshold, label)
 
         # Change the following variable in True to save the preprocessed DataFrame
         # This has to be done in order to avoid re-preprocessing data in developing phase
         # BE CAREFUL! Saving data can take a lot of time
-        save_preprocessed_data = False
+        save_preprocessed_data = True
         if save_preprocessed_data == True: save_preprocessed_dataframe(df)
             
         return df
