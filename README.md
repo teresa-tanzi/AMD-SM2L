@@ -3,7 +3,7 @@ Project for the courses "Algorithms for Massive Datasets" and " Statistical Meth
 
 This repository contains two main files:
 - teresa_tanzi_AMD_SMML.ipynb is a Jupyter Notebook containing the project's code.
-- household_ridfe_regression_teresa_tanzi.pdf contains the relative report.
+- household_ridge_regression_teresa_tanzi.pdf contains the relative report.
 
 The code automatically downloads the dataset from Kaggle. Before execute the code, it is necessary to configure the Kaggle's API, following the instrictions reported in [kaggle-api](https://github.com/Kaggle/kaggle-api).
 
