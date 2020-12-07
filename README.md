@@ -1,4 +1,7 @@
 # amd-sm2l
+
+*Update*: 
+
 Project for the courses "Algorithms for Massive Datasets" and " Statistical Methods for Machine Learning", a.y. 2019/2020.
 
 This repository contains two main files:
