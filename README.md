@@ -1,6 +1,6 @@
 # amd-sm2l
 
-*Update*: 
+**Update**: an updated version with some minor fixes of the project has been added. The updated files are denoted with the suffix "v2" in the file name.
 
 Project for the courses "Algorithms for Massive Datasets" and " Statistical Methods for Machine Learning", a.y. 2019/2020.
 
